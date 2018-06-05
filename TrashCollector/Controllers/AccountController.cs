@@ -196,7 +196,7 @@ namespace TrashCollector.Controllers
 
         //
         // GET: /Account/RegisterEmployee
-        //[Authorize(Roles = RoleName.Employee)]
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult RegisterEmployee()
         {
             return View();
@@ -205,7 +205,7 @@ namespace TrashCollector.Controllers
         //
         // POST: /Account/RegisterCustomer
         [HttpPost]
-        //[Authorize(Roles = RoleName.Employee)]
+        [Authorize(Roles = RoleName.Employee)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterEmployee(RegisterEmployeeViewModel model)
         {
@@ -225,9 +225,6 @@ namespace TrashCollector.Controllers
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                    result = await UserManager.AddToRoleAsync(user.Id, RoleName.Customer);
 
                 if (result.Succeeded)
                 {
