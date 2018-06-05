@@ -1,14 +1,36 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace TrashCollector.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [Required]
+        [StringLength(20)]
+        public string Phone { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public string State { get; set; }
+
+        [Required]
+        [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
+        [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
+        public string ZipCode { get; set; }
+
+        public DayOfWeek WeeklyPickupDayID { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -20,6 +42,10 @@ namespace TrashCollector.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
+        public DbSet<WorkOrderType> WorkOrderTypes { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
