@@ -139,9 +139,9 @@ namespace TrashCollector.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult RegisterCustomer()
         {
-            var viewModel = new RegisterViewModel();
+            var viewModel = new RegisterCustomerViewModel();
             viewModel.DaysOfOperation = WeekDay.GetOperatingDay(_context);
             return View(viewModel);
         }
@@ -151,7 +151,7 @@ namespace TrashCollector.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> RegisterCustomer(RegisterCustomerViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -170,6 +170,10 @@ namespace TrashCollector.Controllers
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                    result = await UserManager.AddToRoleAsync(user.Id, RoleName.Customer);
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

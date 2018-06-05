@@ -64,7 +64,7 @@ namespace TrashCollector.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class RegisterCustomerViewModel
     {
 
         [Required]
@@ -111,6 +111,7 @@ namespace TrashCollector.Models
         [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
         public string ZipCode { get; set; }
 
+        [Required]
         [Display(Name = "Weekly Service Day")]
         public int WeeklyPickupDayID { get; set; }
 
