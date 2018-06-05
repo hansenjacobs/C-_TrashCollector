@@ -17,9 +17,11 @@ namespace TrashCollector.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _context;
 
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -139,7 +141,9 @@ namespace TrashCollector.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var viewModel = new RegisterViewModel();
+            viewModel.DaysOfOperation = WeekDay.GetOperatingDay(_context);
+            return View(viewModel);
         }
 
         //
@@ -151,7 +155,20 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    NameFirst = model.NameFirst,
+                    NameLast = model.NameLast,
+                    Phone = model.Phone,
+                    Address = model.Address,
+                    City = model.City,
+                    State = model.State,
+                    ZipCode = model.ZipCode,
+                    WeeklyPickupDayID = model.WeeklyPickupDayID
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

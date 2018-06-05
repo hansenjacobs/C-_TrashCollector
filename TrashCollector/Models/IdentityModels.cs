@@ -16,6 +16,16 @@ namespace TrashCollector.Models
         public string Phone { get; set; }
 
         [Required]
+        [StringLength(100)]
+        [Display(Name ="Last Name")]
+        public string NameLast { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "First Name")]
+        public string NameFirst { get; set; }
+
+        [Required]
         public string Address { get; set; }
 
         [Required]
@@ -29,7 +39,8 @@ namespace TrashCollector.Models
         [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
         public string ZipCode { get; set; }
 
-        public DayOfWeek WeeklyPickupDayID { get; set; }
+        public int WeeklyPickupDayID { get; set; }
+        public WeekDay WeeklyPickupDay { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -45,6 +56,7 @@ namespace TrashCollector.Models
         public DbSet<WorkOrder> WorkOrders { get; set; }
         public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
         public DbSet<WorkOrderType> WorkOrderTypes { get; set; }
+        public DbSet<WeekDay> WeekDays { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

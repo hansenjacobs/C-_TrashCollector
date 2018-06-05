@@ -209,10 +209,27 @@
     <Compile Include="Migrations\201806051635487_SeedWorkOrderTypesStatuses.Designer.cs">
       <DependentUpon>201806051635487_SeedWorkOrderTypesStatuses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806051658364_SeedASPNetRoles.cs" />
+    <Compile Include="Migrations\201806051658364_SeedASPNetRoles.Designer.cs">
+      <DependentUpon>201806051658364_SeedASPNetRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806051808424_ApplicationUserAddNameFields.cs" />
+    <Compile Include="Migrations\201806051808424_ApplicationUserAddNameFields.Designer.cs">
+      <DependentUpon>201806051808424_ApplicationUserAddNameFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806051836221_AddedWeekDayModel.cs" />
+    <Compile Include="Migrations\201806051836221_AddedWeekDayModel.Designer.cs">
+      <DependentUpon>201806051836221_AddedWeekDayModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806051836518_SeedWeekDays.cs" />
+    <Compile Include="Migrations\201806051836518_SeedWeekDays.Designer.cs">
+      <DependentUpon>201806051836518_SeedWeekDays.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\WeekDay.cs" />
     <Compile Include="Models\WorkOrder.cs" />
     <Compile Include="Models\WorkOrderStatus.cs" />
     <Compile Include="Models\WorkOrderType.cs" />
@@ -301,6 +318,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806051635487_SeedWorkOrderTypesStatuses.resx">
       <DependentUpon>201806051635487_SeedWorkOrderTypesStatuses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806051658364_SeedASPNetRoles.resx">
+      <DependentUpon>201806051658364_SeedASPNetRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806051808424_ApplicationUserAddNameFields.resx">
+      <DependentUpon>201806051808424_ApplicationUserAddNameFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806051836221_AddedWeekDayModel.resx">
+      <DependentUpon>201806051836221_AddedWeekDayModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806051836518_SeedWeekDays.resx">
+      <DependentUpon>201806051836518_SeedWeekDays.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

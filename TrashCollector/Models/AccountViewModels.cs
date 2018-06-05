@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace TrashCollector.Models
 {
@@ -64,6 +66,17 @@ namespace TrashCollector.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [StringLength(100)]
+        [Display(Name = "Last Name")]
+        public string NameLast { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "First Name")]
+        public string NameFirst { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +92,29 @@ namespace TrashCollector.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string Phone { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public string State { get; set; }
+
+        [Required]
+        [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
+        [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
+        public string ZipCode { get; set; }
+
+        [Display(Name = "Weekly Service Day")]
+        public int WeeklyPickupDayID { get; set; }
+
+        public IEnumerable<WeekDay> DaysOfOperation { get; set; }
     }
 
     public class ResetPasswordViewModel
