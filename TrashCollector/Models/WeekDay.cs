@@ -29,7 +29,7 @@ namespace TrashCollector.Models
         [Required]
         public bool AreOperating { get; set; }
 
-        public static IEnumerable<WeekDay> GetOperatingDay(ApplicationDbContext _context)
+        public static IEnumerable<WeekDay> GetOperatingDays(ApplicationDbContext _context)
         {
             return _context.WeekDays.Where(w => w.AreOperating == true).ToList();
         }

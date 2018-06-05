@@ -39,7 +39,7 @@ namespace TrashCollector.Models
         [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
         public string ZipCode { get; set; }
 
-        public int WeeklyPickupDayID { get; set; }
+        public int? WeeklyPickupDayId { get; set; }
         public WeekDay WeeklyPickupDay { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

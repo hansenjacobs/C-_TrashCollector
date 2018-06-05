@@ -225,6 +225,10 @@
     <Compile Include="Migrations\201806051836518_SeedWeekDays.Designer.cs">
       <DependentUpon>201806051836518_SeedWeekDays.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.cs" />
+    <Compile Include="Migrations\201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.Designer.cs">
+      <DependentUpon>201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -296,6 +300,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\RegisterEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806051836518_SeedWeekDays.resx">
       <DependentUpon>201806051836518_SeedWeekDays.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.resx">
+      <DependentUpon>201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
