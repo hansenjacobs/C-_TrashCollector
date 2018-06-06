@@ -17,23 +17,6 @@ namespace TrashCollector.Controllers
             _context = new ApplicationDbContext();
         }
         
-        // GET: Employee
-        public ActionResult Index()
-        {
-            var workOrders = _context.WorkOrders
-                .Include(w => w.Status)
-                .Include(w => w.Type)
-                .Where(w => w.Status.IsConfirmed == true
-                && w.Status.IsOpen == true);
-            return View();
-        }
-
-        // GET: Employee/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Employee/Create
         public ActionResult Create()
         {
@@ -54,6 +37,12 @@ namespace TrashCollector.Controllers
             {
                 return View();
             }
+        }
+
+        // GET: Employee/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
         }
 
         // GET: Employee/Edit/5
@@ -98,6 +87,25 @@ namespace TrashCollector.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult GetDashboardWorkOrders()
+        {
+            var workOrders = _context.WorkOrders
+                .Include(w => w.ServiceAddress.PostalCode.City.State)
+                .Include(w => w.Status)
+                .Include(w => w.Type)
+                .Include(w => w.RequestedBy)
+                .Where(w => w.Status.IsConfirmed == true
+                && DbFunctions.TruncateTime(w.ScheduledDate) == DateTime.Today);
+
+            return Json(new { workOrders = workOrders }, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Employee
+        public ActionResult Index()
+        {
+            return View();
         }
     }
 }

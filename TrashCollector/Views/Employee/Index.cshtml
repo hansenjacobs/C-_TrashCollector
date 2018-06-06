@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Your Work Orders Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table id="work-orders">
+    <thead>
+        <tr>
+            <th>WO Number</th>
+            <th>Service Address</th>
+            <th>Requested By</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#work-orders").DataTable({
+                ajax: {
+                    url: "/Employee/GetDashboardWorkOrders",
+                    dataSrc: "workOrders",
+
+                },
+                columns: [
+                    {
+                        data: "Id",
+                        render: function (data, type, workOrder) {
+                            return "<a href='/WorkOrder/Details/" + workOrder.Id + "'>" + workOrder.Id + "</a>";
+                        }
+                    },
+                    {
+                        data: "",
+                        render: function (data, type, address) {
+                            return address.AddressLine + ", " + address.PostalCode.City.Name + ", " + address.PostalCode.City.State.Name + " " + address.PostalCode.Code;
+                        }
+                    },
+                    {
+                        data: "RequestedBy",
+                        render: function (data, type, user) {
+                            return user.NameFirst + " " + user.NameLast;
+                        }
+                    },
+                    {
+                        data: "WorkOrderType.Name"
+                    },
+                    {
+                        data: "WorkOrderStatus.Name"
+                    }
+                ]
+            });
+        })
+    </script>
+    }
+
+
+

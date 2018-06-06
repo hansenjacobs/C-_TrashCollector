@@ -22,6 +22,8 @@ namespace TrashCollector.Models
 
         public ApplicationUser RequestedBy { get; set; }
 
+        public Address ServiceAddress { get; set; }
+
         public DateTime? CompletionDateTime { get; set; }
 
         public ApplicationUser CompletedBy { get; set; }
