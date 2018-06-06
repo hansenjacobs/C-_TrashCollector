@@ -230,6 +230,14 @@
     <Compile Include="Migrations\201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.Designer.cs">
       <DependentUpon>201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806061259413_IdentityModelAddedAssignedZipCode.cs" />
+    <Compile Include="Migrations\201806061259413_IdentityModelAddedAssignedZipCode.Designer.cs">
+      <DependentUpon>201806061259413_IdentityModelAddedAssignedZipCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806061309286_IdentityModelAddedAssignedZipCode1.cs" />
+    <Compile Include="Migrations\201806061309286_IdentityModelAddedAssignedZipCode1.Designer.cs">
+      <DependentUpon>201806061309286_IdentityModelAddedAssignedZipCode1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EmployeeViewModels.cs" />
@@ -342,6 +350,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.resx">
       <DependentUpon>201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806061259413_IdentityModelAddedAssignedZipCode.resx">
+      <DependentUpon>201806061259413_IdentityModelAddedAssignedZipCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806061309286_IdentityModelAddedAssignedZipCode1.resx">
+      <DependentUpon>201806061309286_IdentityModelAddedAssignedZipCode1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
