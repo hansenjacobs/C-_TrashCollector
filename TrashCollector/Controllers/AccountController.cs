@@ -221,7 +221,8 @@ namespace TrashCollector.Controllers
                     Address = model.Address,
                     City = model.City,
                     State = model.State,
-                    ZipCode = model.ZipCode
+                    ZipCode = model.ZipCode,
+                    ServiceZipCode = model.ServiceZipCode
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

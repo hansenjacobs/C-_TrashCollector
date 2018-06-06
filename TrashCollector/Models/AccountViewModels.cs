@@ -165,11 +165,10 @@ namespace TrashCollector.Models
         [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
         public string ZipCode { get; set; }
 
-        [Required]
         [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
         [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
         [Display(Name ="Service Zip Code")]
-        public string AssignedZipCode { get; set; }
+        public string ServiceZipCode { get; set; }
 
     }
 
