@@ -98,18 +98,27 @@ namespace TrashCollector.Models
         public string Phone { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        [Display(Name ="Address")]
+        public string AddressForm { get; set; }
 
         [Required]
-        public string City { get; set; }
+        [Display(Name ="City")]
+        public string CityForm { get; set; }
 
         [Required]
-        public string State { get; set; }
+        [Display(Name ="State")]
+        public int StateIdForm { get; set; }
+
+        public IEnumerable<State> StateList { get; set; }
 
         [Required]
         [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
         [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
-        public string ZipCode { get; set; }
+        [Display(Name ="Postal Code")]
+        public string PostalCodeForm { get; set; }
+
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
 
         [Required]
         [Display(Name = "Weekly Service Day")]
@@ -152,23 +161,31 @@ namespace TrashCollector.Models
         public string Phone { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        [Display(Name ="Address")]
+        public string AddressForm { get; set; }
 
         [Required]
-        public string City { get; set; }
+        [Display(Name ="City")]
+        public string CityForm { get; set; }
 
         [Required]
-        public string State { get; set; }
+        [Display(Name ="State")]
+        public int StateIdForm { get; set; }
 
         [Required]
         [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
         [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
-        public string ZipCode { get; set; }
+        [Display(Name ="Postal Code")]
+        public string PostalCodeForm { get; set; }
 
-        [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
-        [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
-        [Display(Name ="Service Zip Code")]
-        public string ServiceZipCode { get; set; }
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
+
+        [Display(Name ="Service Postal Code")]
+        public string ServicePostalCodeForm { get; set; }
+
+        public int ServicePostalCodeId { get; set; }
+        public PostalCode ServicePostalCode { get; set; }
 
     }
 

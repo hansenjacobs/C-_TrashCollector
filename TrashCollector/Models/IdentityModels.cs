@@ -26,25 +26,14 @@ namespace TrashCollector.Models
         public string NameFirst { get; set; }
 
         [Required]
-        public string Address { get; set; }
-
-        [Required]
-        public string City { get; set; }
-
-        [Required]
-        public string State { get; set; }
-
-        [Required]
-        [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
-        [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
-        public string ZipCode { get; set; }
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
 
         public int? WeeklyPickupDayId { get; set; }
         public WeekDay WeeklyPickupDay { get; set; }
 
-        [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
-        [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
-        public string ServiceZipCode { get; set; }
+        public int? ServicePostalCodeId { get; set; }
+        public PostalCode ServicePostalCode { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -57,10 +46,16 @@ namespace TrashCollector.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        
+        public DbSet<State> States { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<PostalCode> PostalCodes { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<WeekDay> WeekDays { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
         public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
         public DbSet<WorkOrderType> WorkOrderTypes { get; set; }
-        public DbSet<WeekDay> WeekDays { get; set; }
+
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

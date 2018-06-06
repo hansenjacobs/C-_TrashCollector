@@ -3,7 +3,7 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SeedASPNetRoles : DbMigration
+    public partial class SeedAspNetRoles : DbMigration
     {
         public override void Up()
         {

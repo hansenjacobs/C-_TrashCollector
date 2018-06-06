@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UpdatedIdentityModelWeeklyPickupIdOptional : IMigrationMetadata
+    public sealed partial class InitialSetup : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdatedIdentityModelWeeklyPickupIdOptional));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialSetup));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional"; }
+            get { return "201806061911134_InitialSetup"; }
         }
         
         string IMigrationMetadata.Source

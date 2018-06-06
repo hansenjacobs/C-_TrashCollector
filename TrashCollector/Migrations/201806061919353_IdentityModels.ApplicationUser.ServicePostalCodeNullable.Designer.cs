@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class SeedWeekDays : IMigrationMetadata
+    public sealed partial class IdentityModelsApplicationUserServicePostalCodeNullable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedWeekDays));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(IdentityModelsApplicationUserServicePostalCodeNullable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806051836518_SeedWeekDays"; }
+            get { return "201806061919353_IdentityModels.ApplicationUser.ServicePostalCodeNullable"; }
         }
         
         string IMigrationMetadata.Source

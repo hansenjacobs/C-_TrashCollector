@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class IdentityModelAddedAssignedZipCode : IMigrationMetadata
+    public sealed partial class SeedWeekDays : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(IdentityModelAddedAssignedZipCode));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedWeekDays));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806061259413_IdentityModelAddedAssignedZipCode"; }
+            get { return "201806061915536_SeedWeekDays"; }
         }
         
         string IMigrationMetadata.Source

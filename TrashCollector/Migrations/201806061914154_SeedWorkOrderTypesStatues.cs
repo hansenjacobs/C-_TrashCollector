@@ -3,7 +3,7 @@ namespace TrashCollector.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SeedWorkOrderTypesStatuses : DbMigration
+    public partial class SeedWorkOrderTypesStatues : DbMigration
     {
         public override void Up()
         {
@@ -18,8 +18,6 @@ namespace TrashCollector.Migrations
         
         public override void Down()
         {
-            Sql("DELETE FROM WorkOrderTypes");
-            Sql("DELETE FROM WorkOrderStatuses");
         }
     }
 }

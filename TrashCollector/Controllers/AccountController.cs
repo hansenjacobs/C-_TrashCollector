@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TrashCollector.Models;
+using System.Data.Entity;
 
 namespace TrashCollector.Controllers
 {
@@ -143,6 +144,7 @@ namespace TrashCollector.Controllers
         {
             var viewModel = new RegisterCustomerViewModel();
             viewModel.DaysOfOperation = WeekDay.GetOperatingDays(_context);
+            viewModel.StateList = State.GetStates(_context);
             return View(viewModel);
         }
 
@@ -155,6 +157,33 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.AddressForm = model.AddressForm.ToUpper();
+                model.CityForm = model.CityForm.ToUpper();
+                model.PostalCodeForm = model.PostalCodeForm.ToUpper();
+
+                model.Address = new Address()
+                {
+                    AddressLine = model.AddressForm,
+                    PostalCode = new PostalCode()
+                    {
+                        Code = model.PostalCodeForm,
+                        City = new City()
+                        {
+                            Name = model.CityForm,
+                            State = new State() { Id = model.StateIdForm, Name = State.GetStateNameById(_context, model.StateIdForm) }
+                        }
+                    }
+                };
+
+                model.Address.Id = Address.GetAddressId(_context, model.Address);
+                model.AddressId = model.Address.Id;
+
+                if(model.AddressId == 0)
+                {
+                    model.Address = Address.AddAddress(_context, model.Address);
+                    model.AddressId = model.Address.Id;
+                }
+                
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -162,10 +191,7 @@ namespace TrashCollector.Controllers
                     NameFirst = model.NameFirst,
                     NameLast = model.NameLast,
                     Phone = model.Phone,
-                    Address = model.Address,
-                    City = model.City,
-                    State = model.State,
-                    ZipCode = model.ZipCode,
+                    AddressId = model.AddressId,
                     WeeklyPickupDayId = model.WeeklyPickupDayId
                 };
 
@@ -191,6 +217,7 @@ namespace TrashCollector.Controllers
 
             // If we got this far, something failed, redisplay form
             model.DaysOfOperation = WeekDay.GetOperatingDays(_context);
+            model.StateList = State.GetStates(_context);
             return View(model);
         }
 
@@ -203,7 +230,7 @@ namespace TrashCollector.Controllers
         }
 
         //
-        // POST: /Account/RegisterCustomer
+        // POST: /Account/RegisterEmployee
         [HttpPost]
         [Authorize(Roles = RoleName.Employee)]
         [ValidateAntiForgeryToken]
@@ -211,6 +238,32 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.AddressForm = model.AddressForm.ToUpper();
+                model.CityForm = model.CityForm.ToUpper();
+                model.PostalCodeForm = model.PostalCodeForm.ToUpper();
+
+                model.Address = new Address()
+                {
+                    AddressLine = model.AddressForm,
+                    PostalCode = new PostalCode()
+                    {
+                        Code = model.PostalCodeForm,
+                        City = new City()
+                        {
+                            Name = model.CityForm,
+                            State = new State() { Id = model.StateIdForm, Name = State.GetStateNameById(_context, model.StateIdForm) }
+                        }
+                    }
+                };
+
+                model.Address.Id = Address.GetAddressId(_context, model.Address);
+
+                if (model.AddressId == 0)
+                {
+                    model.Address = Address.AddAddress(_context, model.Address);
+                    model.AddressId = model.Address.Id;
+                }
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -218,11 +271,8 @@ namespace TrashCollector.Controllers
                     NameFirst = model.NameFirst,
                     NameLast = model.NameLast,
                     Phone = model.Phone,
-                    Address = model.Address,
-                    City = model.City,
-                    State = model.State,
-                    ZipCode = model.ZipCode,
-                    ServiceZipCode = model.ServiceZipCode
+                    AddressId = model.AddressId,
+                    ServicePostalCodeId = model.ServicePostalCodeId
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

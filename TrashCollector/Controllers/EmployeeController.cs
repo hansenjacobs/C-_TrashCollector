@@ -4,16 +4,27 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TrashCollector.Models;
+using System.Data.Entity;
 
 namespace TrashCollector.Controllers
 {
     public class EmployeeController : Controller
     {
         private ApplicationDbContext _context;
+
+        public EmployeeController()
+        {
+            _context = new ApplicationDbContext();
+        }
         
         // GET: Employee
         public ActionResult Index()
         {
+            var workOrders = _context.WorkOrders
+                .Include(w => w.Status)
+                .Include(w => w.Type)
+                .Where(w => w.Status.IsConfirmed == true
+                && w.Status.IsOpen == true);
             return View();
         }
 

@@ -7,13 +7,13 @@ namespace TrashCollector.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class SeedWorkOrderTypesStatuses : IMigrationMetadata
+    public sealed partial class SeedAspNetRoles : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedWorkOrderTypesStatuses));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedAspNetRoles));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806051635487_SeedWorkOrderTypesStatuses"; }
+            get { return "201806061914551_SeedAspNetRoles"; }
         }
         
         string IMigrationMetadata.Source

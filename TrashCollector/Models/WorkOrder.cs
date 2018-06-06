@@ -20,6 +20,8 @@ namespace TrashCollector.Models
         public int StatusId { get; set; }
         public WorkOrderStatus Status { get; set; }
 
+        public ApplicationUser RequestedBy { get; set; }
+
         public DateTime? CompletionDateTime { get; set; }
 
         public ApplicationUser CompletedBy { get; set; }

@@ -202,48 +202,40 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806051630578_InitialSetup.cs" />
-    <Compile Include="Migrations\201806051630578_InitialSetup.Designer.cs">
-      <DependentUpon>201806051630578_InitialSetup.cs</DependentUpon>
+    <Compile Include="Migrations\201806061911134_InitialSetup.cs" />
+    <Compile Include="Migrations\201806061911134_InitialSetup.Designer.cs">
+      <DependentUpon>201806061911134_InitialSetup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806051635487_SeedWorkOrderTypesStatuses.cs" />
-    <Compile Include="Migrations\201806051635487_SeedWorkOrderTypesStatuses.Designer.cs">
-      <DependentUpon>201806051635487_SeedWorkOrderTypesStatuses.cs</DependentUpon>
+    <Compile Include="Migrations\201806061913078_SeedStates.cs" />
+    <Compile Include="Migrations\201806061913078_SeedStates.Designer.cs">
+      <DependentUpon>201806061913078_SeedStates.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806051658364_SeedASPNetRoles.cs" />
-    <Compile Include="Migrations\201806051658364_SeedASPNetRoles.Designer.cs">
-      <DependentUpon>201806051658364_SeedASPNetRoles.cs</DependentUpon>
+    <Compile Include="Migrations\201806061914154_SeedWorkOrderTypesStatues.cs" />
+    <Compile Include="Migrations\201806061914154_SeedWorkOrderTypesStatues.Designer.cs">
+      <DependentUpon>201806061914154_SeedWorkOrderTypesStatues.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806051808424_ApplicationUserAddNameFields.cs" />
-    <Compile Include="Migrations\201806051808424_ApplicationUserAddNameFields.Designer.cs">
-      <DependentUpon>201806051808424_ApplicationUserAddNameFields.cs</DependentUpon>
+    <Compile Include="Migrations\201806061914551_SeedAspNetRoles.cs" />
+    <Compile Include="Migrations\201806061914551_SeedAspNetRoles.Designer.cs">
+      <DependentUpon>201806061914551_SeedAspNetRoles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806051836221_AddedWeekDayModel.cs" />
-    <Compile Include="Migrations\201806051836221_AddedWeekDayModel.Designer.cs">
-      <DependentUpon>201806051836221_AddedWeekDayModel.cs</DependentUpon>
+    <Compile Include="Migrations\201806061915536_SeedWeekDays.cs" />
+    <Compile Include="Migrations\201806061915536_SeedWeekDays.Designer.cs">
+      <DependentUpon>201806061915536_SeedWeekDays.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806051836518_SeedWeekDays.cs" />
-    <Compile Include="Migrations\201806051836518_SeedWeekDays.Designer.cs">
-      <DependentUpon>201806051836518_SeedWeekDays.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.cs" />
-    <Compile Include="Migrations\201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.Designer.cs">
-      <DependentUpon>201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806061259413_IdentityModelAddedAssignedZipCode.cs" />
-    <Compile Include="Migrations\201806061259413_IdentityModelAddedAssignedZipCode.Designer.cs">
-      <DependentUpon>201806061259413_IdentityModelAddedAssignedZipCode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806061309286_IdentityModelAddedAssignedZipCode1.cs" />
-    <Compile Include="Migrations\201806061309286_IdentityModelAddedAssignedZipCode1.Designer.cs">
-      <DependentUpon>201806061309286_IdentityModelAddedAssignedZipCode1.cs</DependentUpon>
+    <Compile Include="Migrations\201806061919353_IdentityModels.ApplicationUser.ServicePostalCodeNullable.cs" />
+    <Compile Include="Migrations\201806061919353_IdentityModels.ApplicationUser.ServicePostalCodeNullable.Designer.cs">
+      <DependentUpon>201806061919353_IdentityModels.ApplicationUser.ServicePostalCodeNullable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\City.cs" />
     <Compile Include="Models\EmployeeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PostalCode.cs" />
     <Compile Include="Models\RoleName.cs" />
+    <Compile Include="Models\State.cs" />
     <Compile Include="Models\WeekDay.cs" />
     <Compile Include="Models\WorkOrder.cs" />
     <Compile Include="Models\WorkOrderStatus.cs" />
@@ -330,32 +322,23 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806051630578_InitialSetup.resx">
-      <DependentUpon>201806051630578_InitialSetup.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806061911134_InitialSetup.resx">
+      <DependentUpon>201806061911134_InitialSetup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806051635487_SeedWorkOrderTypesStatuses.resx">
-      <DependentUpon>201806051635487_SeedWorkOrderTypesStatuses.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806061913078_SeedStates.resx">
+      <DependentUpon>201806061913078_SeedStates.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806051658364_SeedASPNetRoles.resx">
-      <DependentUpon>201806051658364_SeedASPNetRoles.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806061914154_SeedWorkOrderTypesStatues.resx">
+      <DependentUpon>201806061914154_SeedWorkOrderTypesStatues.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806051808424_ApplicationUserAddNameFields.resx">
-      <DependentUpon>201806051808424_ApplicationUserAddNameFields.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806061914551_SeedAspNetRoles.resx">
+      <DependentUpon>201806061914551_SeedAspNetRoles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806051836221_AddedWeekDayModel.resx">
-      <DependentUpon>201806051836221_AddedWeekDayModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806061915536_SeedWeekDays.resx">
+      <DependentUpon>201806061915536_SeedWeekDays.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806051836518_SeedWeekDays.resx">
-      <DependentUpon>201806051836518_SeedWeekDays.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.resx">
-      <DependentUpon>201806052049483_UpdatedIdentityModelWeeklyPickupIdOptional.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806061259413_IdentityModelAddedAssignedZipCode.resx">
-      <DependentUpon>201806061259413_IdentityModelAddedAssignedZipCode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806061309286_IdentityModelAddedAssignedZipCode1.resx">
-      <DependentUpon>201806061309286_IdentityModelAddedAssignedZipCode1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806061919353_IdentityModels.ApplicationUser.ServicePostalCodeNullable.resx">
+      <DependentUpon>201806061919353_IdentityModels.ApplicationUser.ServicePostalCodeNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
