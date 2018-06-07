@@ -55,6 +55,7 @@ namespace TrashCollector.Models
         public DbSet<WorkOrder> WorkOrders { get; set; }
         public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
         public DbSet<WorkOrderType> WorkOrderTypes { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
 
         public ApplicationDbContext()

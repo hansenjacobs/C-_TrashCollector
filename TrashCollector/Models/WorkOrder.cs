@@ -20,12 +20,18 @@ namespace TrashCollector.Models
         public int StatusId { get; set; }
         public WorkOrderStatus Status { get; set; }
 
+        [Required]
+        [StringLength(128)]
+        public string RequestedById { get; set; }
         public ApplicationUser RequestedBy { get; set; }
 
         public Address ServiceAddress { get; set; }
 
         public DateTime? CompletionDateTime { get; set; }
 
+        [Required]
+        [StringLength(128)]
+        public string CompletedById { get; set; }
         public ApplicationUser CompletedBy { get; set; }
     }
 }
