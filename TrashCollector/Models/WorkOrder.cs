@@ -22,8 +22,8 @@ namespace TrashCollector.Models
 
         [Required]
         [StringLength(128)]
-        public string RequestedById { get; set; }
-        public ApplicationUser RequestedBy { get; set; }
+        public string CustomerUserId { get; set; }
+        public Customer Customer { get; set; }
 
         public int ServiceAddressId { get; set; }
         public Address ServiceAddress { get; set; }
@@ -32,19 +32,19 @@ namespace TrashCollector.Models
 
         [StringLength(128)]
         public string CompletedById { get; set; }
-        public ApplicationUser CompletedBy { get; set; }
+        public Employee CompletedBy { get; set; }
 
-        public static WorkOrder ScheduleNextPickUp (ApplicationDbContext _context, ApplicationUser requetedBy)
+        public static WorkOrder ScheduleNextPickUp (ApplicationDbContext _context, Customer customer)
         {
-            int daysToAdd = ((int)requetedBy.WeeklyPickupDayId - (int)DateTime.Today.DayOfWeek + 7) % 7;
+            int daysToAdd = ((int)customer.WeeklyPickupDayId - (int)DateTime.Today.DayOfWeek + 7) % 7;
             var newWorkOrder = new WorkOrder()
             {
                 SubmittedDateTime = DateTime.Now,
                 ScheduledDate = DateTime.Today.AddDays(daysToAdd),
                 TypeId = WorkOrderType.ReoccurringWeekly,
                 StatusId = WorkOrderStatus.Confirmed,
-                RequestedById = requetedBy.Id,
-                ServiceAddressId = requetedBy.AddressId
+                CustomerUserId = customer.UserId,
+                ServiceAddressId = customer.AddressId
             };
 
             _context.WorkOrders.Add(newWorkOrder);

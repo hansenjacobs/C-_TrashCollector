@@ -19,13 +19,7 @@ namespace TrashCollector.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            var viewModel = new CustomerIndexViewModel()
-            {
-                Customer = _context.AspNetUsers.SingleOrDefault(a => a.UserName == User.Identity.Name)
-            };
-
-            viewModel.NextWorkOrder = _context.WorkOrders.OrderBy(w => w.ScheduledDate).FirstOrDefault(w => w.RequestedById == viewModel.Customer.Id);
-            return View(viewModel);
+            return View();
         }
 
         // GET: Customer/Details/5

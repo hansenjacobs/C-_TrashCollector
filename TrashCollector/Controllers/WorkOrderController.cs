@@ -24,7 +24,7 @@ namespace TrashCollector.Controllers
                 .Include(w => w.ServiceAddress.PostalCode.City.State)
                 .Include(w => w.Status)
                 .Include(w => w.Type)
-                .Include(w => w.RequestedBy);
+                .Include(w => w.Customer);
             return View(workOrders);
         }
 

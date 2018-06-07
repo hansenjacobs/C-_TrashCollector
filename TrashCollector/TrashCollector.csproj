@@ -252,11 +252,17 @@
     <Compile Include="Migrations\201806071351401_Models.WOrkOrder.CompletedByIdNullable.Designer.cs">
       <DependentUpon>201806071351401_Models.WOrkOrder.CompletedByIdNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806071737508_NormalizedCustomerEmployeeUserData.cs" />
+    <Compile Include="Migrations\201806071737508_NormalizedCustomerEmployeeUserData.Designer.cs">
+      <DependentUpon>201806071737508_NormalizedCustomerEmployeeUserData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerIndexViewModel.cs" />
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -562,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806071351401_Models.WOrkOrder.CompletedByIdNullable.resx">
       <DependentUpon>201806071351401_Models.WOrkOrder.CompletedByIdNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806071737508_NormalizedCustomerEmployeeUserData.resx">
+      <DependentUpon>201806071737508_NormalizedCustomerEmployeeUserData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

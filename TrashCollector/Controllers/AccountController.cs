@@ -187,12 +187,7 @@ namespace TrashCollector.Controllers
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
-                    Email = model.Email,
-                    NameFirst = model.NameFirst,
-                    NameLast = model.NameLast,
-                    Phone = model.Phone,
-                    AddressId = model.AddressId,
-                    WeeklyPickupDayId = model.WeeklyPickupDayId
+                    Email = model.Email
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -204,7 +199,7 @@ namespace TrashCollector.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    WorkOrder.ScheduleNextPickUp(_context, user);
+                    //WorkOrder.ScheduleNextPickUp(_context, user);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -269,12 +264,7 @@ namespace TrashCollector.Controllers
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
-                    Email = model.Email,
-                    NameFirst = model.NameFirst,
-                    NameLast = model.NameLast,
-                    Phone = model.Phone,
-                    AddressId = model.AddressId,
-                    ServicePostalCodeId = model.ServicePostalCodeId
+                    Email = model.Email
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

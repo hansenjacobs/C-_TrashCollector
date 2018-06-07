@@ -96,7 +96,7 @@ namespace TrashCollector.Controllers
                 .Include(w => w.ServiceAddress.PostalCode.City.State)
                 .Include(w => w.Status)
                 .Include(w => w.Type)
-                .Include(w => w.RequestedBy).ToList()
+                .Include(w => w.Customer).ToList()
                 .Where(w => w.Status.IsConfirmed == true
                 && DbFunctions.TruncateTime(w.ScheduledDate) == DateTime.Today);
             return View(workOrders);

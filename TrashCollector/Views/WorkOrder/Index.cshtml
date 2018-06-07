@@ -26,7 +26,7 @@
                     @workOrder.ServiceAddress.AddressLine, @workOrder.ServiceAddress.PostalCode.City.Name,
                     @workOrder.ServiceAddress.PostalCode.City.State.Name @workOrder.ServiceAddress.PostalCode.Code
                 </td>
-                <td>@Html.ActionLink(workOrder.RequestedBy.NameFirst + " " + workOrder.RequestedBy.NameLast, "Details", "Customer", new { id = workOrder.RequestedBy.Id }, null)</td>
+                
                 <td>@workOrder.Type.Name</td>
                 <td>@workOrder.Status.Name</td>
             </tr>
