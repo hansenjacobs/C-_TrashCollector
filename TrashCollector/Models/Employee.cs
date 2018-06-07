@@ -25,5 +25,10 @@ namespace TrashCollector.Models
 
         public int? ServicePostalCodeId { get; set; }
         public PostalCode ServicePostalCode { get; set; }
+
+        public static Employee GetEmployeeById (ApplicationDbContext _context, string userId)
+        {
+            return _context.Employees.SingleOrDefault(e => e.UserId == userId);
+        }
     }
 }

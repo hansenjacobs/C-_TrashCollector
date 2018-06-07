@@ -240,7 +240,7 @@ namespace TrashCollector.Controllers
 
         //
         // GET: /Account/RegisterEmployee
-        [Authorize(Roles = RoleName.Customer)]
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult RegisterEmployee()
         {
             return View();
@@ -249,7 +249,7 @@ namespace TrashCollector.Controllers
         //
         // POST: /Account/RegisterEmployee
         [HttpPost]
-        [Authorize(Roles = RoleName.Customer)]
+        [Authorize(Roles = RoleName.Employee)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterEmployee(RegisterEmployeeViewModel model)
         {

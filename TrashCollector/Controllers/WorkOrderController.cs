@@ -5,9 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using TrashCollector.Models;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 
 namespace TrashCollector.Controllers
 {
+    [Authorize(Roles =RoleName.Employee)]
     public class WorkOrderController : Controller
     {
         private ApplicationDbContext _context;
@@ -25,6 +29,30 @@ namespace TrashCollector.Controllers
                 .Include(w => w.Status)
                 .Include(w => w.Type)
                 .Include(w => w.Customer);
+            return View(workOrders);
+        }
+
+        public ActionResult EmployeeDashboard()
+        {
+            int? userServicePostalCode = Employee.GetEmployeeById(_context, User.Identity.GetUserId()).ServicePostalCodeId;
+
+            List<WorkOrder> workOrders;
+
+            if (userServicePostalCode != null && userServicePostalCode > 0)
+            {
+                workOrders = _context.WorkOrders
+                .Include(w => w.ServiceAddress.PostalCode.City.State)
+                .Include(w => w.Status)
+                .Include(w => w.Type)
+                .Include(w => w.Customer)
+                .Where(w => w.ServiceAddress.PostalCodeId == userServicePostalCode)
+                .ToList();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
             return View(workOrders);
         }
 
