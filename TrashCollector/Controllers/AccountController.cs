@@ -197,9 +197,29 @@ namespace TrashCollector.Controllers
 
                 if (result.Succeeded)
                 {
+                    
+                }
+
+                if (result.Succeeded)
+                {
+                    var newCustomer = new Customer()
+                    {
+                        UserId = user.Id,
+                        AddressId = model.AddressId,
+                        NameFirst = model.NameFirst,
+                        NameLast = model.NameLast,
+                        Phone = model.Phone,
+                        WeeklyPickupDayId = model.WeeklyPickupDayId
+                    };
+
+                    _context.Customers.Add(newCustomer);
+                    _context.SaveChanges();
+
+                    WorkOrder.ScheduleNextPickUp(_context, newCustomer);
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    //WorkOrder.ScheduleNextPickUp(_context, user);
+                    
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -220,7 +240,7 @@ namespace TrashCollector.Controllers
 
         //
         // GET: /Account/RegisterEmployee
-        [Authorize(Roles = RoleName.Employee)]
+        [Authorize(Roles = RoleName.Customer)]
         public ActionResult RegisterEmployee()
         {
             return View();
@@ -229,37 +249,12 @@ namespace TrashCollector.Controllers
         //
         // POST: /Account/RegisterEmployee
         [HttpPost]
-        [Authorize(Roles = RoleName.Employee)]
+        [Authorize(Roles = RoleName.Customer)]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterEmployee(RegisterEmployeeViewModel model)
         {
             if (ModelState.IsValid)
             {
-                model.AddressForm = model.AddressForm.ToUpper();
-                model.CityForm = model.CityForm.ToUpper();
-                model.PostalCodeForm = model.PostalCodeForm.ToUpper();
-
-                model.Address = new Address()
-                {
-                    AddressLine = model.AddressForm,
-                    PostalCode = new PostalCode()
-                    {
-                        Code = model.PostalCodeForm,
-                        City = new City()
-                        {
-                            Name = model.CityForm,
-                            State = new State() { Id = model.StateIdForm, Name = State.GetStateNameById(_context, model.StateIdForm) }
-                        }
-                    }
-                };
-
-                model.Address.Id = Address.GetAddressId(_context, model.Address);
-
-                if (model.AddressId == 0)
-                {
-                    model.Address = Address.AddAddress(_context, model.Address);
-                    model.AddressId = model.Address.Id;
-                }
 
                 var user = new ApplicationUser
                 {
@@ -271,6 +266,20 @@ namespace TrashCollector.Controllers
 
                 if (result.Succeeded)
                 {
+                    model.ServicePostalCodeId = PostalCode.GetPostalCodeId(_context, model.ServicePostalCodeForm);
+
+                    var newEmployee = new Employee()
+                    {
+                        UserId = user.Id,
+                        NameFirst = model.NameFirst,
+                        NameLast = model.NameLast,
+                        ServicePostalCodeId = model.ServicePostalCodeId == 0 ? null : (int?)model.ServicePostalCodeId
+                    };
+
+                    _context.Employees.Add(newEmployee);
+                    _context.SaveChanges();
+                    
+
                     await UserManager.AddToRoleAsync(user.Id, RoleName.Employee);
                     
                     // Removed auto sign in, as the creation is being done by a logged in user already

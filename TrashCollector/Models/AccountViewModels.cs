@@ -156,31 +156,6 @@ namespace TrashCollector.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        [StringLength(20)]
-        public string Phone { get; set; }
-
-        [Required]
-        [Display(Name ="Address")]
-        public string AddressForm { get; set; }
-
-        [Required]
-        [Display(Name ="City")]
-        public string CityForm { get; set; }
-
-        [Required]
-        [Display(Name ="State")]
-        public int StateIdForm { get; set; }
-
-        [Required]
-        [StringLength(5, MinimumLength = 5, ErrorMessage = "Zip code must be 5 digits")]
-        [RegularExpression("^[0-9]{5}$", ErrorMessage = "Zip code can only contain numerical digits.")]
-        [Display(Name ="Postal Code")]
-        public string PostalCodeForm { get; set; }
-
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
-
         [Display(Name ="Service Postal Code")]
         public string ServicePostalCodeForm { get; set; }
 

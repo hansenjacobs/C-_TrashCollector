@@ -51,5 +51,13 @@ namespace TrashCollector.Models
 
             return result == null ? 0 : result.Id;
         }
+
+        public static int GetPostalCodeId(ApplicationDbContext _context, string postalCode)
+        {
+            var result = _context.PostalCodes
+                .Where(p => p.Code == postalCode).FirstOrDefault();
+
+            return result == null ? 0 : result.Id;
+        }
     }
 }
