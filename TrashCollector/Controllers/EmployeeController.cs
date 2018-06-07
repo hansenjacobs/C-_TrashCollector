@@ -89,23 +89,17 @@ namespace TrashCollector.Controllers
             }
         }
 
-        public ActionResult GetDashboardWorkOrders()
+        // GET: Employee
+        public ActionResult Index()
         {
             var workOrders = _context.WorkOrders
                 .Include(w => w.ServiceAddress.PostalCode.City.State)
                 .Include(w => w.Status)
                 .Include(w => w.Type)
-                .Include(w => w.RequestedBy)
+                .Include(w => w.RequestedBy).ToList()
                 .Where(w => w.Status.IsConfirmed == true
                 && DbFunctions.TruncateTime(w.ScheduledDate) == DateTime.Today);
-
-            return Json(new { workOrders = workOrders }, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Employee
-        public ActionResult Index()
-        {
-            return View();
+            return View(workOrders);
         }
     }
 }

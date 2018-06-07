@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<TrashCollector.Models.WorkOrder>
+@{
+    ViewBag.Title = "All Work Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table id="workOrders" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>WO Number</th>
+            <th>Service Address</th>
+            <th>Requested By</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var workOrder in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(workOrder.Id.ToString(), "Details", "WorkOrder", new { id = workOrder.Id }, null)</td>
+                <td>
+                    @workOrder.ServiceAddress.AddressLine, @workOrder.ServiceAddress.PostalCode.City.Name,
+                    @workOrder.ServiceAddress.PostalCode.City.State.Name @workOrder.ServiceAddress.PostalCode.Code
+                </td>
+                <td>@Html.ActionLink(workOrder.RequestedBy.NameFirst + " " + workOrder.RequestedBy.NameLast, "Details", "Customer", new { id = workOrder.RequestedBy.Id }, null)</td>
+                <td>@workOrder.Type.Name</td>
+                <td>@workOrder.Status.Name</td>
+            </tr>
+        }
+        <tr></tr>
+    </tbody>
+</table>

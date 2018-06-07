@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace TrashCollector.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
@@ -56,7 +57,7 @@ namespace TrashCollector.Models
         public DbSet<WorkOrderStatus> WorkOrderStatuses { get; set; }
         public DbSet<WorkOrderType> WorkOrderTypes { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-
+        public DbSet<ApplicationUser> AspNetUsers { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

@@ -3,15 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
     public class CustomerController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public CustomerController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
         // GET: Customer
         public ActionResult Index()
         {
-            return View();
+            var viewModel = new CustomerIndexViewModel()
+            {
+                Customer = _context.AspNetUsers.SingleOrDefault(a => a.UserName == User.Identity.Name)
+            };
+
+            viewModel.NextWorkOrder = _context.WorkOrders.OrderBy(w => w.ScheduledDate).FirstOrDefault(w => w.RequestedById == viewModel.Customer.Id);
+            return View(viewModel);
         }
 
         // GET: Customer/Details/5
@@ -20,27 +34,6 @@ namespace TrashCollector.Controllers
             return View();
         }
 
-        // GET: Customer/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Customer/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)

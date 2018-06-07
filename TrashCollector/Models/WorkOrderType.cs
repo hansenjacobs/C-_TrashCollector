@@ -9,5 +9,8 @@ namespace TrashCollector.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public const int ReoccurringWeekly = 1;
+        public const int OneTime = 2;
     }
 }
