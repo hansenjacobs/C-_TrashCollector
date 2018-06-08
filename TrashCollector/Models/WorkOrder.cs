@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrashCollector.Models
 {
@@ -32,6 +33,7 @@ namespace TrashCollector.Models
 
         [StringLength(128)]
         public string CompletedById { get; set; }
+        [ForeignKey("CompletedById")]
         public Employee CompletedBy { get; set; }
 
         public static WorkOrder ScheduleNextPickUp (ApplicationDbContext _context, Customer customer)

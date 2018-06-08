@@ -59,7 +59,38 @@ namespace TrashCollector.Controllers
         // GET: WorkOrder/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var workOrder = _context.WorkOrders
+                .Include(w => w.ServiceAddress.PostalCode.City.State)
+                .Include(w => w.Status)
+                .Include(w => w.Type)
+                .Include(w => w.CompletedBy)
+                .Include(w => w.Customer)
+                .SingleOrDefault(w => w.Id == id);
+            return View(workOrder);
+        }
+
+        public ActionResult CompleteWorkOrder(int id)
+        {
+            var workOrder = _context.WorkOrders.Include(w => w.Type).Single(w => w.Id == id);
+            // Create Transaction
+            var transaction = new Transaction()
+            {
+                Amount = 4,
+                Description = workOrder.Type.Name + "Pickup",
+                EnteredById = User.Identity.GetUserId(),
+                TransactionDateTime = DateTime.Now,
+                UserAccountId = workOrder.CustomerUserId
+            };
+
+            _context.Transactions.Add(transaction);
+            
+            workOrder.StatusId = WorkOrderStatus.Completed;
+            workOrder.CompletedById = User.Identity.GetUserId();
+            workOrder.CompletionDateTime = DateTime.Now;
+
+            _context.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         // GET: WorkOrder/Create

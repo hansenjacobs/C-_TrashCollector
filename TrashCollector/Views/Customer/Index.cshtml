@@ -1,8 +1,40 @@
-﻿@model CustomerIndexViewModel
+﻿@model IEnumerable<Customer>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Customer.Id</h2>
+<h2>Customers</h2>
+@if ((string)TempData["ProfileUpdate"] == "success")
+{
+    <p class="text-success">Profile has been updated.</p>
+}
 
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Weekly Pickup</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var customer in Model)
+            {
+            <tr>
+                <td>@Html.ActionLink(customer.NameFirst + " " + customer.NameLast, "Edit", "Customer", new { id = customer.UserId }, null)</td>
+                <td>
+                    @customer.Address.AddressLine<br />
+                    @customer.Address.PostalCode.City.Name, 
+                    @customer.Address.PostalCode.City.State.Name 
+                    @customer.Address.PostalCode.Code
+                </td>
+                <td>@customer.Phone</td>
+                <td>@customer.WeeklyPickupDay.Name</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.UserId }, null)</td>
+            </tr>
+            }
+        </tbody>
+    </table>

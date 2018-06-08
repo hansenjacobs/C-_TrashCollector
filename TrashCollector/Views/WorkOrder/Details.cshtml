@@ -1,0 +1,36 @@
+﻿@model WorkOrder
+@{
+    ViewBag.Title = "WO# " + Model.Id.ToString() + " - Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Work Order @Model.Id.ToString() Details</h2>
+<dl class="dl-horizontal">
+    <dt>Customer</dt>
+    <dd>@Model.Customer.NameFirst @Model.Customer.NameLast</dd>
+    <dt>Customer Phone</dt>
+    <dd>@Model.Customer.Phone</dd>
+    <hr />
+    <dt>Service Address</dt>
+    <dd>
+        @Model.ServiceAddress.AddressLine <br />
+        @Model.ServiceAddress.PostalCode.City.Name, @Model.ServiceAddress.PostalCode.City.State.Name @Model.ServiceAddress.PostalCode.Code
+    </dd>
+    <hr />
+    <dt>Created on</dt>
+    <dd>@Model.SubmittedDateTime</dd>
+    <dt>Scheduled for</dt>
+    <dd>@Model.ScheduledDate</dd>
+    <dt>Type</dt>
+    <dd>@Model.Type.Name</dd>
+    <dt>Status</dt>
+    <dd>@Model.Status.Name</dd>
+    @if(Model.CompletedById != null || Model.CompletionDateTime != null)
+    {
+        <dt>Completed on</dt>
+        <dd>@Model.CompletionDateTime</dd>
+        <dt>Completed by</dt>
+        <dd>@Model.CompletedBy.NameFirst @Model.CompletedBy.NameLast</dd>
+    }
+</dl>
+
