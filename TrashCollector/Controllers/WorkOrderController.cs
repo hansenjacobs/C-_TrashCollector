@@ -11,7 +11,7 @@ using Microsoft.Owin.Security;
 
 namespace TrashCollector.Controllers
 {
-    [Authorize(Roles =RoleName.Employee)]
+    
     public class WorkOrderController : Controller
     {
         private ApplicationDbContext _context;
@@ -22,6 +22,7 @@ namespace TrashCollector.Controllers
         }
 
         // GET: WorkOrder
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult Index()
         {
             var workOrders = _context.WorkOrders
@@ -32,6 +33,7 @@ namespace TrashCollector.Controllers
             return View(workOrders);
         }
 
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult EmployeeDashboard()
         {
             int? userServicePostalCode = Employee.GetEmployeeById(_context, User.Identity.GetUserId()).ServicePostalCodeId;
@@ -69,6 +71,7 @@ namespace TrashCollector.Controllers
             return View(workOrder);
         }
 
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult CompleteWorkOrder(int id)
         {
             var workOrder = _context.WorkOrders.Include(w => w.Type).Single(w => w.Id == id);
@@ -94,28 +97,74 @@ namespace TrashCollector.Controllers
         }
 
         // GET: WorkOrder/Create
+        [Authorize(Roles =RoleName.Customer + ", " +RoleName.Employee)]
         public ActionResult Create()
         {
-            return View();
+            WorkOrderCreateViewModel viewModel;
+
+            if (User.IsInRole(RoleName.Employee))
+            {
+                viewModel = new WorkOrderCreateViewModel()
+                {
+                    Customers = _context.Customers.OrderBy(c => c.NameLast).ThenBy(c => c.NameFirst).ToList(),
+                    Statuses = _context.WorkOrderStatuses.ToList(),
+                    StatusId = WorkOrderStatus.Confirmed
+                };
+            }
+            else
+            {
+                viewModel = new WorkOrderCreateViewModel()
+                {
+                    CustomerUserId = User.Identity.GetUserId(),
+                    StatusId = WorkOrderStatus.Confirmed
+                };
+            }
+            
+
+            return View(viewModel);
         }
 
         // POST: WorkOrder/Create
+        [Authorize(Roles = RoleName.Customer + "," +RoleName.Employee)]
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(WorkOrderCreateViewModel viewModel)
         {
-            try
+            if (User.IsInRole(RoleName.Customer))
             {
-                // TODO: Add insert logic here
+                viewModel.CustomerUserId = User.Identity.GetUserId();
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (!ModelState.IsValid)
             {
-                return View();
+                if (User.IsInRole(RoleName.Employee))
+                {
+                    viewModel.Customers = _context.Customers.OrderBy(c => c.NameLast).ThenBy(c => c.NameFirst).ToList();
+                    viewModel.Statuses = _context.WorkOrderStatuses.ToList();
+                }
+
+                return View(viewModel);
             }
+
+            var newWorkOrder = new WorkOrder()
+            {
+                SubmittedDateTime = DateTime.Now,
+                CustomerUserId = viewModel.CustomerUserId,
+                ScheduledDate = viewModel.ScheduledDate == null ? DateTime.Today.AddDays(1) : (DateTime) viewModel.ScheduledDate,
+                ServiceAddressId = _context.Customers.Single(c => c.UserId == viewModel.CustomerUserId).AddressId,
+                StatusId = viewModel.StatusId,
+                CompletedById = viewModel.StatusId == WorkOrderStatus.Completed ? User.Identity.GetUserId() : null,
+                CompletionDateTime = viewModel.StatusId == WorkOrderStatus.Completed ? (DateTime?)DateTime.Now : null,
+                TypeId = WorkOrderType.OneTime
+            };
+
+            _context.WorkOrders.Add(newWorkOrder);
+            _context.SaveChanges();
+
+            return RedirectToAction("Details", new { id = newWorkOrder.Id });
         }
 
         // GET: WorkOrder/Edit/5
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult Edit(int id)
         {
             return View();
@@ -123,6 +172,7 @@ namespace TrashCollector.Controllers
 
         // POST: WorkOrder/Edit/5
         [HttpPost]
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -138,6 +188,7 @@ namespace TrashCollector.Controllers
         }
 
         // GET: WorkOrder/Delete/5
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult Delete(int id)
         {
             return View();
@@ -145,6 +196,7 @@ namespace TrashCollector.Controllers
 
         // POST: WorkOrder/Delete/5
         [HttpPost]
+        [Authorize(Roles = RoleName.Employee)]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

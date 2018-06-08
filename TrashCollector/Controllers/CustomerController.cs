@@ -19,6 +19,7 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customer
+        [Authorize]
         public ActionResult Index()
         {
             if(User.IsInRole(RoleName.Employee))

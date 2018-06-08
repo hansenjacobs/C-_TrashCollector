@@ -27,6 +27,16 @@ namespace TrashCollector.Models
         [Display(Name = "First Name")]
         public string NameFirst { get; set; }
 
+        public string NameFirstLast
+        {
+            get { return NameFirst + " " + NameLast; }
+        }
+
+        public string NameLastFirst
+        {
+            get { return NameLast + ", " + NameFirst; }
+        }
+
         [Required]
         public int AddressId { get; set; }
         public Address Address { get; set; }

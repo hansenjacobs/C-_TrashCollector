@@ -278,6 +278,7 @@
     <Compile Include="Models\WorkOrder.cs" />
     <Compile Include="Models\WorkOrderStatus.cs" />
     <Compile Include="Models\WorkOrderType.cs" />
+    <Compile Include="Models\WorkOrderViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -522,6 +523,7 @@
     <Content Include="Views\WorkOrder\EmployeeDashboard.cshtml" />
     <Content Include="Views\WorkOrder\Details.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\WorkOrder\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
