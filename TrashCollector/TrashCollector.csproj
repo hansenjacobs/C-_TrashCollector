@@ -200,6 +200,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\WorkOrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -265,6 +266,7 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerTransactionViewModel.cs" />
     <Compile Include="Models\CustomerViewModels.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeViewModels.cs" />
@@ -394,6 +396,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Media\home-banner.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -524,6 +527,7 @@
     <Content Include="Views\WorkOrder\Details.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\WorkOrder\Create.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

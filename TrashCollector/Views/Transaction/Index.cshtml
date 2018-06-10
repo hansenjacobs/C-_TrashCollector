@@ -1,0 +1,34 @@
+﻿@model CustomerTransactionViewModel
+@{
+    ViewBag.Title = "Your Billing History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<dl class="dl-horizontal">
+    <dt>Account Name </dt>
+    <dd>@Model.Customer.NameFirstLast</dd>
+    <dt>Current Balance </dt>
+    <dd>@Model.Balance.ToString("C2")</dd>
+</dl>
+<hr />
+<table class="table table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Transaction Date</th>
+            <th>Description</th>
+            <th class="text-right">Amount</th>
+        </tr>
+    </thead>
+        @foreach(var transaction in Model.Transactions)
+        {
+            <tr>
+            <td>@transaction.Id</td>
+            <td>@transaction.TransactionDateTime</td>
+            <td>@transaction.Description</td>
+            <td class="text-right">@transaction.Amount.ToString("C2")</td>
+            </tr>
+        }
+</table>
+
