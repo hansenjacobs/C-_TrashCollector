@@ -47,7 +47,11 @@ namespace TrashCollector.Controllers
                 .Include(w => w.Status)
                 .Include(w => w.Type)
                 .Include(w => w.Customer)
-                .Where(w => w.ServiceAddress.PostalCodeId == userServicePostalCode)
+                .Where(w => w.ServiceAddress.PostalCodeId == userServicePostalCode
+                && (w.ScheduledDate == DateTime.Today
+                || w.ScheduledDate < DateTime.Today
+                && (w.Status.IsOpen == true
+                || w.CompletionDateTime.Value.Date == DateTime.Today)))
                 .ToList();
             }
             else

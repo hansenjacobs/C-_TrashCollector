@@ -7,7 +7,11 @@
     <img src="~/Content/Media/home-banner.jpg" alt="Local trash pckup truck." />
 </div>
 
-@if (User.IsInRole(RoleName.Customer))
+@if (User.IsInRole(RoleName.Employee))
+{
+    @RenderPage("~/WorkOrder/EmployeeDashboard")
+}
+else if (User.IsInRole(RoleName.Customer))
 {
 <div class="row">
     <div class="col-md-4">

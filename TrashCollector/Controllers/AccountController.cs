@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TrashCollector.Models;
 using System.Data.Entity;
+using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TrashCollector.Controllers
 {
@@ -82,6 +84,10 @@ namespace TrashCollector.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var employeeRole = _context.Roles.Single(r => r.Name.Contains(RoleName.Employee));
+                    var employee = _context.Users.Single(u => u.Email == model.Email);
+                    if(employee.Roles.Select(r => r.RoleId).Contains(employeeRole.Id))
+                        return RedirectToAction("EmployeeDashboard", "WorkOrder");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
