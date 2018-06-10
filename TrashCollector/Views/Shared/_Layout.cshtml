@@ -25,7 +25,10 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.IsInRole(RoleName.Employee))
                     {
-
+                        <li>@Html.ActionLink("Work Orders", "Index", "WorkOrder")</li>
+                        <li>@Html.ActionLink("Your Weekly Pick-Ups", "WeeklyPickUps", "Customer")</li>
+                        <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
+                        <li>@Html.ActionLink("Employees", "Index", "Employee")</li>
 
                     }
                     else if (User.IsInRole(RoleName.Customer))

@@ -14,6 +14,7 @@
             <th>Requested By</th>
             <th>Type</th>
             <th>Status</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,12 @@
                 <td>@workOrder.Customer.NameFirst @workOrder.Customer.NameLast</td>
                 <td>@workOrder.Type.Name</td>
                 <td>@workOrder.Status.Name</td>
+                <td>
+                    @if (workOrder.Status.IsOpen == true)
+                    {
+                        @Html.ActionLink("Mark Completed", "CompleteWorkOrder", "WorkOrder", new { id = workOrder.Id }, null)
+                    }
+                </td>
             </tr>
         }
         <tr></tr>

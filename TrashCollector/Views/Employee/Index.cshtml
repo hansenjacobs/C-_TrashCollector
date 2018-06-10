@@ -1,36 +1,44 @@
-﻿@using Microsoft.AspNet.Identity
-@model IEnumerable<TrashCollector.Models.WorkOrder>
+﻿@model IEnumerable<Employee>
 @{
-    ViewBag.Title = "Your Work Orders Dashboard";
+    ViewBag.Title = "Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<table id="workOrders" class="table table-bordered table-hover">
+<div>
+    <p>@Html.ActionLink("New Employee", "RegisterEmployee", "Account", null, new { @class = "btn btn-default" })</p>
+</div>
+
+<table id="employees" class="table table-bordered table-hover table-responsive">
     <thead>
         <tr>
-            <th>WO Number</th>
-            <th>Service Address</th>
-            <th>Requested By</th>
-            <th>Type</th>
-            <th>Status</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Service Postal Code</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var workOrder in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(workOrder.Id.ToString(), "Details", "WorkOrder", new { id = workOrder.Id }, null)</td>
-                <td>
-                    @workOrder.ServiceAddress.AddressLine, @workOrder.ServiceAddress.PostalCode.City.Name,
-                    @workOrder.ServiceAddress.PostalCode.City.State.Name @workOrder.ServiceAddress.PostalCode.Code
-                </td>
-                
-                <td>@workOrder.Type.Name</td>
-                <td>@workOrder.Status.Name</td>
-            </tr>
-        }
-        <tr></tr>
+            @foreach(var employee in Model)
+            {
+                <tr>
+                    <td>@employee.NameFirst</td>
+                    <td>@employee.NameLast</td>
+                    <td>@(employee.ServicePostalCode == null ? "" : employee.ServicePostalCode.Code)</td>
+                    <td>@Html.ActionLink("Edit", "Edit", "Employee", new { id = employee.UserId }, null)</td>
+                </tr>
+            }
     </tbody>
+    
 </table>
+
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+        $("#employees").DataTable();
+    })
+    </script>
+    }
+

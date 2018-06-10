@@ -42,16 +42,16 @@ namespace TrashCollector.Controllers
 
             if (userServicePostalCode != null && userServicePostalCode > 0)
             {
+                var date = DateTime.Today;
                 workOrders = _context.WorkOrders
                 .Include(w => w.ServiceAddress.PostalCode.City.State)
                 .Include(w => w.Status)
                 .Include(w => w.Type)
                 .Include(w => w.Customer)
                 .Where(w => w.ServiceAddress.PostalCodeId == userServicePostalCode
-                && (w.ScheduledDate == DateTime.Today
-                || w.ScheduledDate < DateTime.Today
-                && (w.Status.IsOpen == true
-                || w.CompletionDateTime.Value.Date == DateTime.Today)))
+                && (w.ScheduledDate == date
+                || w.ScheduledDate < date
+                && w.Status.IsOpen == true))
                 .ToList();
             }
             else

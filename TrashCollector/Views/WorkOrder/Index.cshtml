@@ -7,7 +7,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-<table id="workOrders" class="table table-bordered table-hover">
+<table id="workorders" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>WO Number</th>
@@ -30,9 +30,22 @@
                 <td>@workOrder.Customer.NameFirst @workOrder.Customer.NameLast</td>
                 <td>@workOrder.Type.Name</td>
                 <td>@workOrder.Status.Name</td>
-                <td>@Html.ActionLink("Completed", "CompleteWorkOrder", "WorkOrder", new { id = workOrder.Id }, null)</td>
+                <td>
+                    @if (workOrder.Status.IsOpen == true)
+                    {
+                        @Html.ActionLink("Mark Completed", "CompleteWorkOrder", "WorkOrder", new { id = workOrder.Id }, null)
+                    }
+                </td>
             </tr>
         }
-        <tr></tr>
     </tbody>
 </table>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#workorders").DataTable();
+        })
+    </script>
+}

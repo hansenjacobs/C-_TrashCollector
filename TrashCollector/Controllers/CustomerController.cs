@@ -126,26 +126,27 @@ namespace TrashCollector.Controllers
             
         }
 
-        // GET: Customer/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize(Roles = RoleName.Employee)]
+        public ActionResult WeeklyPickUps()
         {
-            return View();
-        }
-
-        // POST: Customer/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            var userId = User.Identity.GetUserId();
+            var servicePostalCode = _context.Employees.Single(e => e.UserId == userId).ServicePostalCodeId;
+            IEnumerable<Customer> customers;
+            if(servicePostalCode != null)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                customers = _context.Customers
+                    .Where(c => c.Address.PostalCodeId == servicePostalCode)
+                    .Include(c => c.WeeklyPickupDay)
+                    .Include(c => c.Address.PostalCode.City.State)
+                    .ToList();
             }
-            catch
+            else
             {
-                return View();
+                customers = _context.Customers
+                    .Include(c => c.Address.PostalCode.City.State).ToList();
             }
+
+            return View(customers);
         }
     }
 }

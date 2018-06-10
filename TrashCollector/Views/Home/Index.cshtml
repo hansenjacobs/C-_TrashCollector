@@ -9,7 +9,13 @@
 
 @if (User.IsInRole(RoleName.Employee))
 {
-    @RenderPage("~/WorkOrder/EmployeeDashboard")
+<div class="row">
+    <div class="col-md-4">
+        <h2>Your Dashboard</h2>
+        <p>View the work orders scheduled today within your service area.</p>
+        <p>@Html.ActionLink("Your Dashboard »", "EmployeeDashboard", "WorkOrder", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-default" })</p>
+    </div>
+</div>
 }
 else if (User.IsInRole(RoleName.Customer))
 {

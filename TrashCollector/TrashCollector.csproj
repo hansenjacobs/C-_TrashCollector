@@ -269,7 +269,7 @@
     <Compile Include="Models\CustomerTransactionViewModel.cs" />
     <Compile Include="Models\CustomerViewModels.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\EmployeeViewModels.cs" />
+    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PostalCode.cs" />
@@ -520,7 +520,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\RegisterEmployee.cshtml" />
-    <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\WorkOrder\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\WorkOrder\EmployeeDashboard.cshtml" />
@@ -528,6 +527,9 @@
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\WorkOrder\Create.cshtml" />
     <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Customer\WeeklyPickUps.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

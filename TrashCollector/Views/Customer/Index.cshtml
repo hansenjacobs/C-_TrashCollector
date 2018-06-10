@@ -10,7 +10,7 @@
     <p class="text-success">Profile has been updated.</p>
 }
 
-    <table class="table table-bordered table-hover table-responsive">
+    <table id="customers" class="table table-bordered table-hover table-responsive">
         <thead>
             <tr>
                 <th>Name</th>
@@ -38,3 +38,12 @@
             }
         </tbody>
     </table>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#customers").DataTable();
+        })
+    </script>
+    }
