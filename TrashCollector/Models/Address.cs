@@ -41,10 +41,11 @@ namespace TrashCollector.Models
         {
             var result = _context.Addresses
                 .Include(a => a.PostalCode.City.State)
-                .Where(a => a.PostalCode.Code == address.PostalCode.Code
+                .Where(a => a.AddressLine == address.AddressLine
+                && a.PostalCode.Code == address.PostalCode.Code
                 && a.PostalCode.City.Name == address.PostalCode.City.Name
                 && a.PostalCode.City.State.Name == address.PostalCode.City.State.Name)
-                .SingleOrDefault();
+                .FirstOrDefault();
 
             return result == null ? 0 : result.Id;
         }

@@ -24,7 +24,7 @@
             @foreach(var customer in Model)
             {
             <tr>
-                <td>@Html.ActionLink(customer.NameFirst + " " + customer.NameLast, "Edit", "Customer", new { id = customer.UserId }, null)</td>
+                <td>@Html.ActionLink(customer.NameFirst + " " + customer.NameLast, "Details", "Customer", new { id = customer.UserId }, null)</td>
                 <td>
                     @customer.Address.AddressLine<br />
                     @customer.Address.PostalCode.City.Name, 

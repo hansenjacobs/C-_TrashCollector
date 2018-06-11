@@ -18,6 +18,17 @@ namespace TrashCollector.Controllers
             _context = new ApplicationDbContext();
         }
 
+        [Authorize(Roles = RoleName.Employee)]
+        public ActionResult Details(string id)
+        {
+            var customer = _context.Customers
+                .Include(c => c.Address.PostalCode.City.State)
+                .Include(c => c.WeeklyPickupDay)
+                .Single(c => c.UserId == id);
+
+            return View(customer);
+        }
+
         // GET: Customer
         [Authorize]
         public ActionResult Index()
@@ -143,7 +154,9 @@ namespace TrashCollector.Controllers
             else
             {
                 customers = _context.Customers
-                    .Include(c => c.Address.PostalCode.City.State).ToList();
+                    .Include(c => c.WeeklyPickupDay)
+                    .Include(c => c.Address.PostalCode.City.State)
+                    .ToList();
             }
 
             return View(customers);
